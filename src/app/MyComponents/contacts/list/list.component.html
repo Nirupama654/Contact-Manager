@@ -1,0 +1,103 @@
+<app-nav></app-nav>
+<div class="container mt-5" *ngIf="contactData.length==0; else elseBlock">
+    <h1 class="text-white text-shadow text-center">No Contacts to Show</h1>
+    <a class="btn btn-success mx-3 mb-5 p-3 shadow" routerLink="/contacts/add" style="margin-left: 1500px;">+Add a Contact</a>
+
+</div>
+<ng-template #elseBlock>
+    <div class="row mt-2 p-4">
+        <a class="add btn btn-success mx-3 mb-3 p-3 shadow col" routerLink="/contacts/add">+Add a Contact</a>
+        <form class="d-flex col " style="margin-left: 600px; ">
+            <input class="form-control me-2 shadow " type="search " placeholder="Search " aria-label="Search " #searchValue>
+            <button class="btn btn-success shadow " type="submit " (click)="onSearch(searchValue.value) " (mouseleave)="onLeaving(searchValue)"><i class="fa fa-search "></i></button>
+        </form>
+    </div>
+    <div class="contactListPage p-3">
+        <div class="container list mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </symbol>
+            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            </symbol>
+            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </symbol>
+          </svg>
+
+            <h1 class="text-white text-shadow mb-3 ">Your Contacts</h1>
+            <div [class]="isError? 'alert alert-danger d-flex align-items-center alert-dismissible fade show': 'd-none' " role="alert ">
+                <svg class="bi flex-shrink-0 me-2 " width="24 " height="24 " role="img " aria-label="Danger: "><use xlink:href="#exclamation-triangle-fill "/></svg>
+                <div>
+                    {{message}}
+                </div>
+                <button type="button " class="btn-close " data-bs-dismiss="alert " aria-label="Close "></button>
+            </div>
+            <div [class]="isSuccess? 'alert alert-success d-flex align-items-center alert-dismissible fade show': 'd-none' " role="alert ">
+                <svg class="bi flex-shrink-0 me-2 " width="24 " height="24 " role="img " aria-label="Success: "><use xlink:href="#check-circle-fill "/></svg>
+                <div>
+                    {{message}}
+                </div>
+                <button type="button " class="btn-close " data-bs-dismiss="alert " aria-label="Close "></button>
+            </div>
+
+            <table class="table table-striped " style="font-size: 1.2rem; ">
+                <thead>
+                    <tr>
+                        <th scope="col ">&emsp;&emsp;&emsp;&emsp;</th>
+                        <th scope="col ">
+
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let con of contactData ;let i = index">
+                        <!-- <th scope="row "><i class="fa fa-user-circle fa-2x text-white text-shadow "></i></th> -->
+                        <td class="p-3 text-white text-shadow" style="font-size: 1.2rem;">
+                            <i class="fa fa-user-circle fa-2x text-white text-shadow "></i><span style="font-size: 1.5rem;">&nbsp;&nbsp;&nbsp;{{con.ContactName}}&nbsp;&nbsp;&nbsp;</span>
+
+                            <!-- <h4 class="text-white text-shadow ">{{contact.ContactName}}</h4> -->
+                        </td>
+                        <td class="p-3 ">
+                            <button class="btn" (click)="seeDetails(con)"><i class="fa fa-arrow-circle-o-up text-white"></i></button>
+                        </td>
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="details" [class]="contact!=''?'d-block':'d-none'">
+            <div class="container">
+                <div class="card-header">
+                    <div class="text-center p-3 mt-2">
+                        <i class="fa fa-user-circle fa-6x text-white text-shadow "></i>
+                    </div>
+                    <div class="text-white text-shadow text-center">
+                        <h1>{{contact.ContactName}}</h1>
+                        <hr>
+                        <p style="font-size: 1.2rem;"><i>{{contact.ContactType}}</i></p>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success p-2 shadow" type="button"><i style="font-size: 1.5rem;">Details</i></button>
+                    </div>
+                    <div class="text-white text-shadow text-center mt-3">
+                        <p style="font-size: 1.5rem;"><i><strong>Contact No. : </strong>{{contact.ContactPhone}}</i></p>
+                        <p style="font-size: 1.5rem;"><i><strong>Email ID : </strong>{{contact.ContactEmail}}</i></p>
+                    </div>
+                    <div class="col text-center mb-3 p-2">
+                        <strong><a routerLink="/contacts/edit/{{contact._id}} " class="btn btn-primary shadow ">Edit</a></strong>
+                        <strong><button class="btn btn-danger mx-3 shadow " (mouseleave)="AfterDeleting()" (click)="onDelete(contact._id)">Delete</button></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

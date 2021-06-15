@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top " style="padding: 50px; font-size: 1.2rem;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <h2 class="text-shadow">Contact Manager</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">
+                        <h4 class="text-shadow">Home</h4>
+                    </a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <a routerLink="/login" class="btn btn-outline-light " type="submit" *ngIf="isShow">Login</a>
+                <a routerLink="/register" class="btn btn-outline-light mx-3" type="submit" *ngIf="isShow">Register</a>
+                <span class="btn btn-outline-light" id="addon-wrapping" *ngIf="!isShow"><i class="fa fa-user  text-shadow"></i>&nbsp;&nbsp;<h6 class="text-shadow">{{uname}}</h6></span>
+                <a href="/" class="btn btn-outline-light mx-3" type="submit" *ngIf="!isShow" (click)="onLogout()"><i class="fa fa-sign-out text-shadow"></i><h6 class="text-shadow">Logout</h6></a>
+            </form>
+        </div>
+    </div>
+</nav>

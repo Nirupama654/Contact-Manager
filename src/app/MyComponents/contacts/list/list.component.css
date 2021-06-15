@@ -1,0 +1,37 @@
+.user {
+    border-radius: 12px;
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.349);
+}
+
+.d-flex {
+    height: 55px;
+}
+
+.add {
+    width: 20%;
+}
+
+.table {
+    width: 50%;
+}
+
+.contactListPage {
+    display: flex;
+}
+
+.details {
+    width: 100%;
+    /* border: 2px solid red; */
+}
+
+.list {
+    margin-left: 60px;
+}
+
+
+/* .stick-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+} */
